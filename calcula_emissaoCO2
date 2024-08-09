@@ -1,0 +1,57 @@
+def calcular_emissoes_co2_por_caminhao():
+    """
+    Calcula a emissão de CO2 para um caminhão que passa por uma barreira de pedágio.
+
+    :return: Emissão de CO2 por caminhão em kg
+    """
+    # Distância em km
+    distancia_km = 0.5
+    
+    # Consumo de combustível durante frenagem e aceleração (km/l)
+    consumo_km_por_litro = 4
+    
+    # Emissão de CO2 por litro de diesel (kg)
+    emissao_por_litro = 2.68
+    
+    # Consumo durante a frenagem e aceleração
+    consumo_frenagem_aceleracao = distancia_km / consumo_km_por_litro
+    
+    # Emissões durante a frenagem e aceleração
+    emissoes_frenagem_aceleracao = consumo_frenagem_aceleracao * emissao_por_litro
+    
+    # Consumo durante a parada (litros por hora)
+    consumo_parada_por_hora = 2
+    tempo_parada_segundos = 15
+    tempo_parada_horas = tempo_parada_segundos / 3600
+    
+    # Consumo durante a parada
+    consumo_parada = consumo_parada_por_hora * tempo_parada_horas
+    
+    # Emissões durante a parada
+    emissoes_parada = consumo_parada * emissao_por_litro
+    
+    # Emissão total de CO2 por caminhão
+    emissoes_totais_por_caminhao = emissoes_frenagem_aceleracao + emissoes_parada
+    
+    return emissoes_totais_por_caminhao
+
+def calcular_emissoes_totais(num_caminhoes):
+    """
+    Calcula a emissão total de CO2 para um número específico de caminhões.
+
+    :param num_caminhoes: Número de caminhões
+    :return: Emissão total de CO2 em kg
+    """
+    emissoes_por_caminhao = calcular_emissoes_co2_por_caminhao()
+    emissoes_totais = emissoes_por_caminhao * num_caminhoes
+    
+    return emissoes_totais
+
+def main():
+    num_caminhoes = int(input("Digite o número de caminhões: "))
+    emissoes_totais = calcular_emissoes_totais(num_caminhoes)
+    
+    print(f"Emissão total de CO2 para {num_caminhoes} caminhões: {emissoes_totais:.2f} kg")
+
+if __name__ == "__main__":
+    main()
